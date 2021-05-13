@@ -9,20 +9,22 @@
 </template>
 
 <script>
-
 export default {
   name: 'Home',
   components: {},
   data() {
     return {
-      projects: [],
-    };
+      projects: []
+    }
   },
-  mounted() {
-    fetch('http://localhost:3000/projects')
-      .then(res => res.json())
-      .then(data => this.projects = data)
-      .catch(err => console.log(err))
-  },
+  async mounted() {
+    const res = await fetch('http://localhost:3000/projects')
+    if (!res.ok) {
+      const msg = `An error has occured: ${res.status}`
+      throw new Error(msg)
+    }
+    const projects = await res.json()
+    this.projects = projects
+  }
 }
 </script>
