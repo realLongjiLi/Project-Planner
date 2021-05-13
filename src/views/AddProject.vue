@@ -19,7 +19,6 @@ export default {
   },
   methods: {
     async submitHandler() {
-      console.log(this.details)
       const project = {
         title: this.title,
         details: this.details,
