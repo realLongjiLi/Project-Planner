@@ -1,5 +1,5 @@
 <template>
-  <div class="project">
+  <div class="project" :class="{ complete: project.complete }">
     <div class="actions">
       <h3 @click="showDetailsHandler">{{ project.title }}</h3>
       <div class="icons">
@@ -9,7 +9,7 @@
         <span class="material-icons" @click="deleteProject">
           delete
         </span>
-        <span class="material-icons">
+        <span class="material-icons tick" @click="completeProject">
           done
         </span>
       </div>
@@ -40,6 +40,18 @@ export default {
         throw new Error(msg)
       }
       this.$emit('delete', this.project.id)
+    },
+    async completeProject() {
+      const res = await fetch(this.uri, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ complete: !this.project.complete })
+      })
+      if (!res.ok) {
+        const msg = `An error has occured: ${res.status}`
+        throw new Error(msg)
+      }
+      this.$emit('complete', this.project.id)
     }
   }
 }
@@ -70,5 +82,11 @@ h3 {
 }
 .material-icons:hover {
   color: #777;
+}
+.project.complete {
+  border-left: 4px solid #00ce89;
+}
+.project.complete .tick {
+  color: #00ce89;
 }
 </style>
