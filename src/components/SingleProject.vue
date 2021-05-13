@@ -6,7 +6,7 @@
         <span class="material-icons">
           edit
         </span>
-        <span class="material-icons">
+        <span class="material-icons" @click="deleteProject">
           delete
         </span>
         <span class="material-icons">
@@ -25,12 +25,21 @@ export default {
   props: ['project'],
   data() {
     return {
-      showDetails: false
+      showDetails: false,
+      uri: 'http://localhost:3000/projects/' + this.project.id
     }
   },
   methods: {
     showDetailsHandler() {
       this.showDetails = !this.showDetails
+    },
+    async deleteProject() {
+      const res = await fetch(this.uri, { method: 'DELETE' })
+      if (!res.ok) {
+        const msg = `An error has occured: ${res.status}`
+        throw new Error(msg)
+      }
+      this.$emit('delete', this.project.id)
     }
   }
 }

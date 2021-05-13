@@ -2,7 +2,7 @@
   <div class="home">
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
-        <SingleProject :project="project" />
+        <SingleProject :project="project" @delete="deleteHandler" />
       </div>
     </div>
   </div>
@@ -26,6 +26,11 @@ export default {
     }
     const projects = await res.json()
     this.projects = projects
+  },
+  methods: {
+    deleteHandler(id) {
+      this.projects = this.projects.filter((project) => project.id != id)
+    }
   }
 }
 </script>
