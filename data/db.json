@@ -11,6 +11,12 @@
       "title": "Make marketing email",
       "details": "Lorem ipsum",
       "complete": true
+    },
+    {
+      "title": "do a website",
+      "details": "create a personal blog using github pages",
+      "complete": false,
+      "id": 3
     }
   ]
 }
