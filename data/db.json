@@ -13,10 +13,10 @@
       "complete": true
     },
     {
-      "title": "do a website",
-      "details": "create a personal blog using github pages",
+      "title": "Do leetcode problems",
+      "details": "3 hours a day keeps the doctor away.",
       "complete": false,
-      "id": 3
+      "id": 4
     }
   ]
 }
